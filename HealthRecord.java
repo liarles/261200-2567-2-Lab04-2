@@ -8,16 +8,15 @@ public class HealthRecord {
     private static int tallestHeight = MIN_PERMITTED_HEIGHT ;
     private static int shortestHeight = MAX_PERMITTED_HEIGHT ;
 
-    private static int Counter = 0;
+    private static int counter = 0;
     private static double averageHeight = 0 ;
 
     public  HealthRecord(int height) {
+        counter ++ ;
         setHeight(height);
-        getCounter() ;
-    }
-    public void setAverageHeight(int height,int counter){
 
     }
+
     public void setHeight(int height) {
 
         // TODO: 2 Check if the input height falls within the permitted range
@@ -32,14 +31,13 @@ public class HealthRecord {
         if ( this.height < shortestHeight )
             shortestHeight = this.height;
 
-    }
+        averageHeight = (averageHeight * (counter - 1) + this.height) / counter;    }
+
     public int getCounter(){
-        Counter ++ ;
-        return Counter;
+        return counter ;
     }
 
     public int getHeight() {
-        averageHeight = averageHeight + height;
         return this.height;
     }
 
@@ -52,10 +50,8 @@ public class HealthRecord {
 //        -OR- return shortestHeight;
     }
     public static double getAverageHeight() {
-        averageHeight = averageHeight / Counter;
         return HealthRecord.averageHeight;
     }
-
     public void displayDetails() {
         System.out.println("Height (cm): " + getHeight());
     }
